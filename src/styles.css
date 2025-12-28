@@ -1,0 +1,194 @@
+:root{
+  --bg:#f3f4f6;
+  --card:#fff;
+  --accent:#c9a34b;
+  --maxW:1200px;
+}
+*{box-sizing:border-box}
+body,html,#root{height:100%; margin:0; background:var(--bg); font-family:Inter,Arial, sans-serif; color:#111}
+.page-bg{display:flex; justify-content:center; padding:0px 16px 20px}
+.site-wrap{width:100%; max-width:var(--maxW); background:transparent}
+
+/* Header */
+.channel-header{background:transparent; border-radius:8px; overflow:visible}
+.banner-area{position:relative; height:300px; display:flex; align-items:flex-end; justify-content:center; background:#000}
+.banner-img{max-width:100%; height:300px; object-fit:contain; display:block}
+
+/* Fade overlays (Option A) */
+.fade-left, .fade-right{
+  position:absolute; top:0; bottom:0; width:120px; pointer-events:none;
+  background: linear-gradient(to right, rgba(243,244,246,1), rgba(243,244,246,0));
+}
+.fade-right{right:0; transform:scaleX(-1);}
+
+/* If you prefer Option C (remove black bars) use this example CSS instead:
+.banner-img{ width:100%; height:300px; object-fit:cover; background-color:#000; }
+and remove fade overlays.
+*/
+
+/* Profile row */
+.profile-row{display:flex; align-items:center; gap:20px; padding:22px 12px 28px;}
+.profile-pic{width:120px; height:120px; border-radius:60px; border:6px solid white; object-fit:cover; margin-top:-60px; background:#fff}
+.meta{flex:1}
+.channel-name{margin:0; font-size:26px}
+.channel-stats{color:#555; margin-top:6px}
+
+/* Content */
+.content{background:transparent; padding:10px 0 60px}
+.section{padding:20px 0}
+.section h2{margin:0 0 12px 0;font-size:20px}
+
+/* Video grid */
+.video-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:18px}
+.video-card{background:var(--card); border-radius:10px; overflow:hidden; box-shadow:0 6px 18px rgba(2,6,23,0.06); cursor:pointer}
+.thumb{position:relative; height:0; padding-top:56.25%}
+.thumb img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+.play-overlay{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); font-size:36px; color:white; text-shadow:0 2px 6px rgba(0,0,0,0.6)}
+.vtitle{padding:12px; font-weight:600}
+
+/* Shorts */
+.shorts-row{display:flex; gap:16px; overflow-x:auto; padding-bottom:8px}
+.short-card{min-width:160px; background:var(--card); border-radius:10px; overflow:hidden; box-shadow:0 6px 18px rgba(2,6,23,0.06); cursor:pointer}
+.short-card img{width:100%; height:280px; object-fit:cover}
+.short-title{padding:8px; font-weight:600}
+
+/* modal player */
+.modal{position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.7); z-index:1000}
+.modal-inner{width:min(1100px,95%); aspect-ratio:16/9; background:#000; position:relative}
+.modal-inner iframe{width:100%; height:100%}
+.close-btn{position:absolute; right:8px; top:8px; z-index:10; background:rgba(255,255,255,0.06); border-radius:8px; border:0; color:white; padding:6px 8px; cursor:pointer}
+
+/* Responsive tweaks */
+@media (max-width:700px){
+  .profile-icon{width:96px;height:96px;margin-top:-48px}
+  .banner-area{height:220px}
+  .banner-img{height:220px}
+  .short-card img{height:220px}
+}
+.banner-container {
+  position: relative;
+  height: 300px;
+  overflow: visible !important;  /* IMPORTANT FIX */
+  background: #000;
+}
+
+/* Banner image */
+.banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Fades */
+.left-fade, .right-fade {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 140px;
+  pointer-events: none;
+  z-index: 5;  /* lower than profile */
+}
+
+.left-fade {
+  left: 0;
+  background: linear-gradient(to right, #f3f4f6, transparent);
+}
+
+.right-fade {
+  right: 0;
+  background: linear-gradient(to left, #f3f4f6, transparent);
+}
+
+/* PROFILE ICON FIX */
+.profile-icon {
+  position: absolute;
+  bottom: -60px;
+  left: 40px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 6px solid white;
+  background: white;
+  object-fit: cover;
+  z-index: 9999;     /* highest */
+}
+.profile-info {
+  position: absolute;
+  bottom: -25px;
+  left: 190px;
+  font-size: 20px;
+  color: #222;
+  font-weight: 500;
+  backdrop-filter: blur(8px);
+  background: rgba(255,255,255,0.6);
+  padding: 6px 14px;
+  border-radius: 12px;
+  z-index: 9999;
+  white-space: nowrap;
+}
+
+.channel-header {
+  margin-bottom: 50px;   /* Adjust as needed */
+  position: relative;
+  z-index: 10;
+}
+.profile-image,
+.profile-info {
+  z-index: 10;   /* Lower than modal */
+}
+.video-section,
+.shorts-section {
+  display: flex;
+  gap: 16px;                 /* nice spacing */
+  overflow-x: auto;          /* horizontal scroll */
+  overflow-y: hidden;
+  padding: 12px 0;
+  scroll-behavior: smooth;   /* smooth scrolling */
+  scrollbar-width: thin;     /* Firefox */
+}
+
+.video-section::-webkit-scrollbar,
+.shorts-section::-webkit-scrollbar {
+  height: 8px;               /* horizontal scrollbar size */
+}
+
+.video-section::-webkit-scrollbar-thumb,
+.shorts-section::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 10px;
+}
+
+.video-card,
+.short-card {
+  flex: 0 0 auto;            /* prevent shrinking */
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.video-card {
+  width: 360px;              /* unique size */
+  height: 275px;
+}
+
+.short-card {
+  width: 180px;              /* different size */
+  height: 320px;
+}
+.video-grid {
+  display: flex;
+  gap: 16px;              /* ← spacing between items */
+  overflow-x: auto;       /* horizontal scroll */
+  overflow-y: hidden;
+  padding: 10px 0;
+  scroll-behavior: smooth;
+}
+
+.video-grid::-webkit-scrollbar {
+  height: 8px;
+}
+.video-grid::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 10px;
+}
